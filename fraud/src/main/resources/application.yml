@@ -2,7 +2,7 @@ application:
   name: customer
 
 server:
-  port: 8081
+  port: 8082
 
 spring:
   jpa:
@@ -11,7 +11,7 @@ spring:
     hibernate:
       ddl-auto: create-drop
   datasource:
-    url: jdbc:postgresql://localhost:5432/customer
+    url: jdbc:postgresql://localhost:5432/fraud
     driverClassName: org.postgresql.Driver
     username: postgres
     password: 1234
