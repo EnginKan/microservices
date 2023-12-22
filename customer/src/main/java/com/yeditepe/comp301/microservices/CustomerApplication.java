@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-@EnableFeignClients
+@EnableFeignClients(value = "fraud-service")
 public class CustomerApplication {
     public static void main(String[] args) {
 

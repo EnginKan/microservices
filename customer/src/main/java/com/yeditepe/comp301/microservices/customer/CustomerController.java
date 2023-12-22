@@ -1,6 +1,7 @@
 package com.yeditepe.comp301.microservices.customer;
 
 import lombok.AllArgsConstructor;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,10 +16,13 @@ public class CustomerController {
     private final CustomerService customerService;
     private RestTemplate restTemplate;
     private MyFeignClient myFeignClient;
+    private RabbitTemplate rabbitTemplate;
 
     @PostMapping("/save")
     public ResponseEntity saveCustomer(@RequestBody CustomerRecord record) {
         boolean isExist = customerService.saveCustomer(record);
+        rabbitTemplate.convertAndSend("firstexchange",
+                "firstkey","NewCustomerCreated");
 
         if (isExist) {
             return ResponseEntity.ok("This is user has already exist");
